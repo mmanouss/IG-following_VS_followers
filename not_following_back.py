@@ -24,6 +24,8 @@ if os.path.exists("not_following_back.txt"):
 #Writes the list of users to a text file
 with open('not_following_back.txt', 'w') as f:
   f.writelines(sorted([username + '\n' for username in not_following]))
+  
+print("The list of users has been written to 'not_following_back.txt'.")
 
 #Writes a file with the differences between the new and old instance of not_following, if an old one exists
 if os.path.exists("old_not_following_back.txt"):
@@ -37,5 +39,4 @@ if os.path.exists("old_not_following_back.txt"):
       for user in file2_contents:
           if user not in file1_contents:
               output_file.write(f"In new, not in old: {user}")
-
-print("The list of users has been written to 'not_following_back.txt', differences between most recent comparison in 'differences_included.txt'.")
+  print("If script has generated 'not_following_back.txt' in the past, differences between most recent comparison written to 'differences_included.txt'.")
