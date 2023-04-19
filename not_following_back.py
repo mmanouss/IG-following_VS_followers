@@ -32,11 +32,12 @@ if os.path.exists("old_not_following_back.txt"):
   with open('not_following_back.txt', "r") as file1, open('old_not_following_back.txt', "r") as file2, open("differences_included.txt", "w") as output_file:
       file1_contents = file1.readlines()
       file2_contents = file2.readlines()
+      output_file.write("Who no longer follows you, that followed you previously:\n")
       for user in file1_contents:
           if user not in file2_contents:
-              output_file.write(f"In old, not in new: {user}")
-      output_file.write("\n")
+              output_file.write(user)
+      output_file.write("\nWho you no longer follow, that you followed previously:\n")
       for user in file2_contents:
           if user not in file1_contents:
-              output_file.write(f"In new, not in old: {user}")
-  print("If script has generated 'not_following_back.txt' in the past, differences between most recent comparison written to 'differences_included.txt'.")
+              output_file.write(user)
+  print("Differences between most recent comparison written to 'differences_included.txt'.")
