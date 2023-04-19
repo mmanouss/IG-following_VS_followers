@@ -1,0 +1,39 @@
+import json
+import os
+
+#Loads the following and followers JSON files from the Instagram data export
+with open('following.json', 'r') as f:
+  following = json.load(f)
+with open('followers.json', 'r') as f:
+  followers = json.load(f)
+
+#Parses the given JSON file into a set
+def parse_json(json_file, relationship):
+    parsed = {user['relationship_data'][0]['username'] for user in json_file[relationship]}
+    print(parsed)
+    return parsed
+  
+#Subtracts your followers from your following, to determine who you are following that isn't a also follower of yours 
+not_following = parse_json(following, 'relationships_following') - parse_json(followers, 'relationships_followers')
+
+#Checks if a previous instance of not_following exists, renames it to "old" if so
+if os.path.exists("not_following_back.txt"):
+    os.rename("not_following_back.txt", "old_not_following_back.txt")
+
+#Writes the list of users to a text file
+with open('not_following_back.txt', 'w') as f:
+  f.writelines([username + '\n' for username in not_following])
+
+#Writes a file with the differences between the new and old instance of not_following, if an old one exists
+with open('not_following_back.txt', "r") as file1, open('old_not_following_back.txt', "r") as file2, open("differences_included.txt", "w") as output_file:
+    file1_contents = file1.readlines()
+    file2_contents = file2.readlines()
+    for user in file1_contents:
+        if user not in file2_contents:
+            output_file.write(f"In old, not in new: {user}")
+    output_file.write("\n")
+    for user in file2_contents:
+        if user not in file1_contents:
+            output_file.write(f"In new, not in old: {user}")
+
+print("The list of users has been written to 'not_following_back.txt', differences between most recent comparison in 'differences_included.txt'.")
