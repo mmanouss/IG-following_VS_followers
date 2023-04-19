@@ -1,6 +1,6 @@
 # Followers vs. Following on Instagram #
 
-### This script allows you to check who doesn't follow you back on Instagram, without any logging in required! ###
+### This script allows you to check who doesn't follow you back on Instagram, without any logging in through a third party required! ###
 
 1. Log into Instagram on your web browser.
 2. Navigate to Settings > Privacy and security > Data Download, then click "Request Download".
