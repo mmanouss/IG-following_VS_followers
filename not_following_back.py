@@ -4,7 +4,7 @@ import os
 #Loads the following and followers JSON files from the Instagram data export
 with open('following.json', 'r') as f:
   following = json.load(f)
-with open('followers.json', 'r') as f:
+with open('followers_1.json', 'r') as f:
   followers = json.load(f)
 
 #Parses the given JSON file into a set of usernames
